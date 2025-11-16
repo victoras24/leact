@@ -12,6 +12,24 @@
 		<script type="text/babel">
 			function App() {
 				const [count, setCount] = React.useState(0);
+				const [dateStart, setDateStart] = React.useState(null);
+				const [dateNow, setDateNow] = React.useState(null);
+				const intervalIdRef = React.useRef(null);
+
+				const handleStart = () => {
+					setDateStart(Date.now());
+					setDateNow(Date.now());
+
+					clearInterval(intervalIdRef);
+					intervalIdRef.current = setInterval(() => {
+						setDateNow(Date.now());
+					}, 10);
+				};
+
+				var timer = 0;
+				if (dateNow !== null && dateStart !== null) {
+					timer = (dateNow - dateStart) / 1000;
+				}
 
 				return (
 					<div>
@@ -19,6 +37,9 @@
 						<button onClick={() => setCount((prevCount) => ++prevCount)}>
 							click me
 						</button>
+						<button onClick={handleStart}>Start</button>
+						<button>Pause</button>
+						<p>{timer}</p>
 					</div>
 				);
 			}
