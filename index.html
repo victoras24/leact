@@ -20,10 +20,14 @@
 					setDateStart(Date.now());
 					setDateNow(Date.now());
 
-					clearInterval(intervalIdRef);
+					clearInterval(intervalIdRef.current);
 					intervalIdRef.current = setInterval(() => {
 						setDateNow(Date.now());
 					}, 10);
+				};
+
+				const handleStop = () => {
+					clearInterval(intervalIdRef.current);
 				};
 
 				var timer = 0;
@@ -38,7 +42,7 @@
 							click me
 						</button>
 						<button onClick={handleStart}>Start</button>
-						<button>Pause</button>
+						<button onClick={handleStop}>Pause</button>
 						<p>{timer}</p>
 					</div>
 				);
