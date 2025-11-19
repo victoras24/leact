@@ -10,6 +10,23 @@
 	<body>
 		<div id="root"></div>
 		<script type="text/babel">
+			function UseCallback() {
+				const prevRef = React.useRef(null);
+
+				const doSomething = React.useCallback(() => {
+					console.log("wow");
+				}, []);
+
+				React.useEffect(() => {
+					if (prevRef.current === doSomething) {
+						console.log("is the same ref");
+					} else {
+						console.log("function ref is changed");
+					}
+					prevRef.current = doSomething;
+				});
+			}
+
 			function App() {
 				const [count, setCount] = React.useState(0);
 				const [dateStart, setDateStart] = React.useState(null);
@@ -37,6 +54,7 @@
 
 				return (
 					<div>
+						<UseCallback />
 						<p>{count}</p>
 						<button onClick={() => setCount((prevCount) => ++prevCount)}>
 							click me
