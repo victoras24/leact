@@ -84,9 +84,3 @@ In React there are 3 phases:
   Use Effect Takes place at the commit phase. So after the render of the body react commits the changes, because react use Object.is to check if the object is changed and commit only the changed ones.
 
 ![alt text](image.png)
-
-(draw how useEffect runs after every render)
-(give the example with the infinite loop, bring up cloudflare :)
-(aha what i concluded is that the state re-renders the component because the object of state is changing, but the ref does not cause a re-render because the object stays the same)
-(mention also that clean up is like leaving from one room to get in an other room)
-(don't forget that anything that does not controlled by React needs useEffect)
