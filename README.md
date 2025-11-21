@@ -81,6 +81,9 @@ In React there are 3 phases:
 - Trigger
 - Render
 - Commit
-  Use Effect Takes place at the commit phase. So after the render of the body react commits the changes, because react use Object.is to check if the object is changed and commit only the changed ones.
+
+Use Effect Takes place at the commit phase. So after the render of the body react commits the changes, because react uses Object.is to check if any dependency of the useEffect is chanaged and commit only the changed ones.
 
 ![alt text](image.png)
+
+We didn't talk about the cleanup function that is used in useEffect. It's important to know that the cleanup runs on the unmount of the component, thus leaving the page runs the cleanup function. Also in the development, if strict mode is enabled, adding console logs, you will notice that it's logging twice. You will see the useEffect function run on mount, test run the cleanup function and then run again the function, as the initial run. So don't try to remove the first 2 test runs, as I tried to do xD. Check the commit https://github.com/victoras24/leact/commit/880510dc4de0824dad243991baf5d63112f27ada I have create a function named cleanup just to show how cleanup works. So run the code and notice that on the initial run that the useEffect function runs after the components. Changing a room, triggers the cleanup function, as the dependency we set it's the roomId, meaning that the component unmounts and get's ready to re-render, before it unmounts, the cleanup function runs.
