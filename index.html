@@ -27,10 +27,20 @@
 				});
 			}
 
+			function Cleanup(roomId) {
+				React.useEffect(() => {
+					console.log("function", roomId);
+					return () => {
+						console.log("cleanup function");
+					};
+				}, [roomId]);
+			}
+
 			function App() {
 				const [count, setCount] = React.useState(0);
 				const [dateStart, setDateStart] = React.useState(null);
 				const [dateNow, setDateNow] = React.useState(null);
+				const [room, setRoom] = React.useState(null);
 				const intervalIdRef = React.useRef(null);
 
 				const handleStart = () => {
@@ -55,6 +65,8 @@
 				return (
 					<div>
 						<UseCallback />
+						<button onClick={() => setRoom(Math.random())}>Change room</button>
+						<Cleanup roomId={room} />
 						<p>{count}</p>
 						<button onClick={() => setCount((prevCount) => ++prevCount)}>
 							click me
